@@ -9,7 +9,7 @@ namespace EmployeeManagement.Models
     {
         public int Id_Employee { get; set; }
         public int PhoneNumber { get; set; }
-
+        public string Specialization { get; set; }
 
     }
 }
