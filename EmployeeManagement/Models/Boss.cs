@@ -5,10 +5,9 @@ using System.Threading.Tasks;
 
 namespace EmployeeManagement.Models
 {
-    public class Boss
+    public class Boss : User
     {
-        public string Code { get; set; }
-        public string NIP { get; set; }
-        public string CompanyName {get; set;}
+        public int BossId { get; set; }
+        public Company Company { get; set; }
     }
 }
