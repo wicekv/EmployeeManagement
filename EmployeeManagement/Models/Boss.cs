@@ -7,7 +7,7 @@ namespace EmployeeManagement.Models
 {
     public class Boss : User
     {
-        public int BossId { get; set; }
+        public string UniqueCode { get; set; }
         public Company Company { get; set; }
     }
 }

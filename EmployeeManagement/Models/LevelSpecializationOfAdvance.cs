@@ -11,7 +11,7 @@ namespace EmployeeManagement.Models
         public Specialization Specialization { get; set; }
         public int LevelOfAdvanceId { get; set; }
         public LevelOfAdvance LevelOfAdvance { get; set; }
-        public int EmployeeId { get; set; }
+        public int UserId { get; set; }
         public Employee Employee { get; set; }
 
     }

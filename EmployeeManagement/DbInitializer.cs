@@ -17,27 +17,27 @@ namespace EmployeeManagement
 
         public void Seed()
         {
-            if(context.Database.CanConnect())
+            if (context.Database.CanConnect())
             {
-                if(!context.Roles.Any())
+                if (!context.Roles.Any())
                 {
                     var roles = GetRoles();
                     context.Roles.AddRange(roles);
                     context.SaveChanges();
                 }
-                if(!context.Specializations.Any())
+                if (!context.Specializations.Any())
                 {
                     var specialization = GetSpecializations();
                     context.AddRange(specialization);
                     context.SaveChanges();
                 }
-                if(!context.LevelOfAdvances.Any())
+                if (!context.LevelOfAdvances.Any())
                 {
                     var levelOfAdvances = GetLevelOfAdvances();
                     context.AddRange(levelOfAdvances);
                     context.SaveChanges();
                 }
-                if(!context.Users.Any())
+                if (!context.Users.Any())
                 {
                     var users = GetUsers();
                     context.AddRange(users);

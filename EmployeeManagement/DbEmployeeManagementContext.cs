@@ -24,10 +24,10 @@ namespace EmployeeManagement
             modelBuilder.Entity<Boss>()
                 .HasOne(c => c.Company)
                 .WithOne(b => b.Boss)
-                .HasForeignKey<Company>(c => c.BossId);
+                .HasForeignKey<Company>(c => c.UserId);
 
             modelBuilder.Entity<LevelSpecializationOfAdvance>()
-                .HasKey(ls => new { ls.SpecializationId, ls.LevelOfAdvanceId, ls.EmployeeId });
+                .HasKey(ls => new { ls.SpecializationId, ls.LevelOfAdvanceId, ls.UserId});
 
             modelBuilder.Entity<LevelSpecializationOfAdvance>()
                 .HasOne(ls => ls.LevelOfAdvance)
@@ -42,9 +42,8 @@ namespace EmployeeManagement
             modelBuilder.Entity<LevelSpecializationOfAdvance>()
                 .HasOne(e => e.Employee)
                 .WithMany(l => l.LevelSpecializationOfAdvances)
-                .HasForeignKey(e => e.EmployeeId);
+                .HasForeignKey(e => e.UserId);
 
-            modelBuilder.Entity<User>().ToTable("Users");
             modelBuilder.Entity<Boss>().ToTable("Bosses");
             modelBuilder.Entity<Employee>().ToTable("Employees");
         }

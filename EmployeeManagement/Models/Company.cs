@@ -13,7 +13,7 @@ namespace EmployeeManagement.Models
         public string Code { get; set; }
 
         public virtual List<Employee> Employees { get; set; }
-        public int BossId { get; set; }
-        public Boss Boss { get; set; }
+        public int UserId { get; set; }
+        public virtual Boss Boss { get; set; }
     }
 }
