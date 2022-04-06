@@ -37,10 +37,16 @@ namespace EmployeeManagement
                     context.AddRange(levelOfAdvances);
                     context.SaveChanges();
                 }
-                if (!context.Users.Any())
+                if(!context.Bosses.Any())
                 {
-                    var users = GetUsers();
-                    context.AddRange(users);
+                    var bosses = GetBosses();
+                    context.AddRange(bosses);
+                    context.SaveChanges();
+                }
+                if (!context.Employees.Any())
+                {
+                    var employees = GetEmployees();
+                    context.AddRange(employees);
                     context.SaveChanges();
                 }
             }
@@ -102,40 +108,75 @@ namespace EmployeeManagement
             };
             return levelOfAdvances;
         }
-        private IEnumerable<User> GetUsers()
+        public IEnumerable<Boss> GetBosses()
         {
-            var users = new List<User>()
+            var bosses = new List<Boss>()
             {
-                new User()
+                new Boss()
+                {
+                    RoleId = 2,
+                    UserName = "BossTest",
+                    Password = "bossTest",
+                    FirstName = "Bartek",
+                    LastName = "Nowakowski",
+                    DateOfBirth = DateTime.Parse("03-03-1996"),
+                    UniqueCode = "test",
+                    Company = new Company()
+                    {
+                        NIP = "PL2302313",
+                        CompanyName = "NowaFirma",
+                        Code = "kodzikdofirmy",
+                    }
+                },
+                new Boss()
+                {
+                    UserName = "BossTest2",
+                    Password = "test2",
+                    FirstName = "Adam",
+                    LastName = "Nowak",
+                    DateOfBirth = DateTime.Parse("03-03-1998"),
+                    RoleId = 2,
+                    UniqueCode = "test2",
+                    Company = new Company()
+                    {
+                        NIP = "PL3200014",
+                        CompanyName = "uStefczyka",
+                        Code = "stefczyk3",
+                    }
+                },
+            };
+            return bosses;
+        }
+        public IEnumerable<Employee> GetEmployees()
+        {
+            var employees = new List<Employee>()
+            {
+                new Employee()
                 {
                     UserName = "EmployeeTest",
                     Password = "employeeTest",
                     FirstName = "Janusz",
                     LastName = "Szewczyk",
                     DateOfBirth = DateTime.Parse("03-03-1996"),
-                    RoleId = 1
-                },
-                new User()
-                {
-                    UserName = "BossTest",
-                    Password = "test",
-                    FirstName = "Adam",
-                    LastName = "Nowak",
-                    DateOfBirth = DateTime.Parse("03-03-1996"),
-                    RoleId = 2
-                },
-                new User()
-                {
-                    UserName = "AdminTest",
-                    Password = "testadmin",
-                    FirstName = "Bartek",
-                    LastName = "Nowakowski",
-                    DateOfBirth = DateTime.Parse("03-03-1996"),
-                    RoleId = 3
-                },
-
+                    RoleId = 1,
+                    PhoneNumber = 323432456,
+                    CompanyId = 1,
+                    LevelSpecializationOfAdvances = new List<LevelSpecializationOfAdvance>()
+                    {
+                        new LevelSpecializationOfAdvance()
+                        {
+                            LevelOfAdvanceId = 1,
+                            SpecializationId = 1
+                        },
+                        new LevelSpecializationOfAdvance()
+                        {
+                            LevelOfAdvanceId = 3,
+                            SpecializationId = 2
+                        }
+                    }
+                }
             };
-            return users;
+            return employees;
         }
     }
 }
