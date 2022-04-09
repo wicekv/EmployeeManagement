@@ -1,3 +1,4 @@
+using EmployeeManagement.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -34,6 +35,8 @@ namespace EmployeeManagement
             });
             services.AddDbContext<DbEmployeeManagementContext>();
             services.AddScoped<DbInitializer>();
+            services.AddAutoMapper(this.GetType().Assembly);
+            services.AddScoped<IAccountService, AccountService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

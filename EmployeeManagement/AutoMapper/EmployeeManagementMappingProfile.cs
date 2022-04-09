@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using EmployeeManagement.DTO;
+using EmployeeManagement.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +10,9 @@ namespace EmployeeManagement.AutoMapper
 {
     public class EmployeeManagementMappingProfile : Profile
     {
+        public EmployeeManagementMappingProfile()
+        {
 
+        }
     }
 }
