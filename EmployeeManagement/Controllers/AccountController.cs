@@ -29,5 +29,15 @@ namespace EmployeeManagement.Controllers
             accountservice.RegisterBoss(bossDTO);
             return Ok();
         }
+
+
+        [Route("register/employee")]
+        [HttpPost]
+        public ActionResult RegisterEmployee([FromBody] RegisterEmployeeDTO employeeDTO)
+        {
+            accountservice.RegisterEmployee(employeeDTO);
+
+            return Ok();
+        }
     }
 }

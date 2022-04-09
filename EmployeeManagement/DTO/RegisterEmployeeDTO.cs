@@ -14,6 +14,7 @@ namespace EmployeeManagement.DTO
         public DateTime DateOfBirth { get; set; }
         public int RoleId { get; set; } = 1;
         public int PhoneNumber { get; set; }
+        public string Code { get; set; }
         public int CompanyId { get; set; }
     }
 }

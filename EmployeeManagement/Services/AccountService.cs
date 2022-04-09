@@ -10,6 +10,7 @@ namespace EmployeeManagement.Services
     public interface IAccountService
     {
         public void RegisterBoss(RegisterBossDTO bossDTO);
+        public void RegisterEmployee(RegisterEmployeeDTO employeeDTO);
     }
     public class AccountService : IAccountService
     {
@@ -40,6 +41,29 @@ namespace EmployeeManagement.Services
             };
             dbContext.Bosses.Add(newBoss);
             dbContext.SaveChanges();
+        }
+        public void RegisterEmployee(RegisterEmployeeDTO employeeDTO)
+        {
+            var code = dbContext
+                .Companies
+                .FirstOrDefault(c => c.Code == employeeDTO.Code);
+
+            if (code.Code == employeeDTO.Code)
+            {
+                var newEmployee = new Employee()
+                {
+                    UserName = employeeDTO.UserName,
+                    Password = employeeDTO.Password,
+                    FirstName = employeeDTO.FirstName,
+                    LastName = employeeDTO.LastName,
+                    DateOfBirth = employeeDTO.DateOfBirth,
+                    RoleId = employeeDTO.RoleId,
+                    PhoneNumber = employeeDTO.PhoneNumber,
+                    CompanyId = code.CompanyId
+                };
+                dbContext.Employees.Add(newEmployee);
+                dbContext.SaveChanges();
+            }
         }
     }
 }
