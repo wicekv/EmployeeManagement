@@ -1,5 +1,6 @@
 ﻿using EmployeeManagement.DTO;
 using EmployeeManagement.Models;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,10 +16,11 @@ namespace EmployeeManagement.Services
     public class AccountService : IAccountService
     {
         private readonly DbEmployeeManagementContext dbContext;
-
-        public AccountService(DbEmployeeManagementContext dbContext)
+        private readonly ILogger<AccountService> logger;
+        public AccountService(DbEmployeeManagementContext dbContext, ILogger<AccountService> logger)
         {
             this.dbContext = dbContext;
+            this.logger = logger;
         }
 
         public void RegisterBoss(RegisterBossDTO bossDTO)
