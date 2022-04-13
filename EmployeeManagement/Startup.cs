@@ -1,3 +1,4 @@
+using EmployeeManagement.Middleware;
 using EmployeeManagement.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -37,6 +38,7 @@ namespace EmployeeManagement
             services.AddScoped<DbInitializer>();
             services.AddAutoMapper(this.GetType().Assembly);
             services.AddScoped<IAccountService, AccountService>();
+            services.AddScoped<ErrorHandlingMiddleware>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -50,6 +52,7 @@ namespace EmployeeManagement
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "EmployeeManagement v1"));
             }
 
+            app.UseMiddleware<ErrorHandlingMiddleware>();
             app.UseHttpsRedirection();
 
             app.UseRouting();

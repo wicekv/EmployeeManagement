@@ -1,4 +1,5 @@
 ﻿using EmployeeManagement.DTO;
+using EmployeeManagement.Exceptions;
 using EmployeeManagement.Models;
 using Microsoft.Extensions.Logging;
 using System;
@@ -22,7 +23,6 @@ namespace EmployeeManagement.Services
             this.dbContext = dbContext;
             this.logger = logger;
         }
-
         public void RegisterBoss(RegisterBossDTO bossDTO)
         {
             var newBoss = new Boss()
@@ -50,8 +50,9 @@ namespace EmployeeManagement.Services
                 .Companies
                 .FirstOrDefault(c => c.Code == employeeDTO.Code);
 
-            if (code.Code == employeeDTO.Code)
-            {
+            if (code == null)
+                throw new NotFoundException("Code not found");
+
                 var newEmployee = new Employee()
                 {
                     UserName = employeeDTO.UserName,
@@ -65,7 +66,6 @@ namespace EmployeeManagement.Services
                 };
                 dbContext.Employees.Add(newEmployee);
                 dbContext.SaveChanges();
-            }
         }
     }
 }
