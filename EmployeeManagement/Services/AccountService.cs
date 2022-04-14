@@ -1,6 +1,7 @@
 ﻿using EmployeeManagement.DTO;
 using EmployeeManagement.Exceptions;
 using EmployeeManagement.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -18,17 +19,18 @@ namespace EmployeeManagement.Services
     {
         private readonly DbEmployeeManagementContext dbContext;
         private readonly ILogger<AccountService> logger;
-        public AccountService(DbEmployeeManagementContext dbContext, ILogger<AccountService> logger)
+        private readonly IPasswordHasher<User> passwordHasher;
+        public AccountService(DbEmployeeManagementContext dbContext, ILogger<AccountService> logger, IPasswordHasher<User> passwordHasher)
         {
             this.dbContext = dbContext;
             this.logger = logger;
+            this.passwordHasher = passwordHasher;
         }
         public void RegisterBoss(RegisterBossDTO bossDTO)
         {
             var newBoss = new Boss()
             {
                 UserName = bossDTO.UserName,
-                Password = bossDTO.Password,
                 FirstName = bossDTO.FirstName,
                 LastName = bossDTO.LastName,
                 DateOfBirth = bossDTO.DateOfBirth,
@@ -41,6 +43,9 @@ namespace EmployeeManagement.Services
                     Code = bossDTO.Code
                 }
             };
+            var hashedPassword = passwordHasher.HashPassword(newBoss, bossDTO.Password);
+            newBoss.Password = hashedPassword;
+
             dbContext.Bosses.Add(newBoss);
             dbContext.SaveChanges();
         }
@@ -64,8 +69,11 @@ namespace EmployeeManagement.Services
                     PhoneNumber = employeeDTO.PhoneNumber,
                     CompanyId = code.CompanyId
                 };
-                dbContext.Employees.Add(newEmployee);
-                dbContext.SaveChanges();
+            var hashedPassword = passwordHasher.HashPassword(newEmployee, employeeDTO.Password);
+            newEmployee.Password = hashedPassword;
+
+            dbContext.Employees.Add(newEmployee);
+            dbContext.SaveChanges();
         }
     }
 }
