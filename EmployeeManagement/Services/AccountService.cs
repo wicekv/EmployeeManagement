@@ -61,7 +61,6 @@ namespace EmployeeManagement.Services
                 var newEmployee = new Employee()
                 {
                     UserName = employeeDTO.UserName,
-                    Password = employeeDTO.Password,
                     FirstName = employeeDTO.FirstName,
                     LastName = employeeDTO.LastName,
                     DateOfBirth = employeeDTO.DateOfBirth,

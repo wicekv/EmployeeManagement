@@ -116,6 +116,7 @@ namespace EmployeeManagement
                 {
                     RoleId = 2,
                     UserName = "BossTest",
+                    Email = "bosstest@wp.pl",
                     Password = "bossTest",
                     FirstName = "Bartek",
                     LastName = "Nowakowski",
@@ -131,6 +132,7 @@ namespace EmployeeManagement
                 new Boss()
                 {
                     UserName = "BossTest2",
+                    Email = "bosstest2@wp.pl",
                     Password = "test2",
                     FirstName = "Adam",
                     LastName = "Nowak",
@@ -154,6 +156,7 @@ namespace EmployeeManagement
                 new Employee()
                 {
                     UserName = "EmployeeTest",
+                    Email = "employeetest@wp.pl",
                     Password = "employeeTest",
                     FirstName = "Janusz",
                     LastName = "Szewczyk",
